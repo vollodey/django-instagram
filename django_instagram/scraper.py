@@ -24,10 +24,11 @@ def instagram_scrap_profile(username, headers):
     """
     try:
         url = "https://www.instagram.com/{}/".format(username)
-        page = requests.get(url, headers={
-            'User-Agent': headers['User-Agent'],
-            'Accept': headers['Accept']
-        })
+        headers = {
+            'origin': "https://www.instagram.com",
+            'user-agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36",
+        }
+        page = requests.get(url,headers=headers)
         # Raise error for 404 cause by a bad profile name
         page.raise_for_status()
         return html.fromstring(page.content)
